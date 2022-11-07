@@ -37,7 +37,7 @@ def train(train_input_dir_path, valid_input_dir_path, classes_txt_path, epochs, 
     # prepare callback
     save_model_dir_path = os.path.join(output_dir_path, f'{datetime.now(pytz.timezone("Asia/Tokyo")).strftime("%Y-%m-%d-%H-%M-%S")}')
     prefix = f'step-{step_size}_batch-{batch_size}'
-    callback = save_callback.SaveCallback(save_model_dir_path=save_model_dir_path, prefix=prefix, classes_list=classes)
+    callback = save_callback.SaveCallback(save_model_dir_path=save_model_dir_path, prefix=prefix)
 
     model.fit_generator(train_dataset, steps_per_epoch=step_size,
                         epochs=epochs,
