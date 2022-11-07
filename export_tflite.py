@@ -43,7 +43,7 @@ def main(input_model_dir_path, train_input_dir_path, output_model_file_path, sam
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='export')
     parser.add_argument('--input_model_dir_path', type=str,
-                        default='~/output_model/2022-11-07-15-45-44/step-1000_batch-10_epoch-5_loss_0.1436_sparse_categorical_accuracy_0.9590_val_loss_0.5825_val_sparse_categorical_accuracy_0.8310',
+                        default='~/output_model/2022-11-07-15-55-32/step-1000_batch-8_epoch-9_loss_0.1008_sparse_categorical_accuracy_0.9715_val_loss_1.3999_val_sparse_categorical_accuracy_0.6440',
                         help="input tensor model dir path")
     parser.add_argument('--train_input_dir_path', type=str,
                         default=os.path.expanduser('~/.vaik-mnist-classification-dataset/dump'))
