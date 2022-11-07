@@ -32,8 +32,8 @@ if __name__ == '__main__':
     parser.add_argument('--classes_txt_path', type=str,
                         default=os.path.expanduser('~/.vaik-mnist-classification-dataset/classes.txt'))
     parser.add_argument('--sample_num', type=int, default=25000)
-    parser.add_argument('--image_height', type=int, default=256)
-    parser.add_argument('--image_width', type=int, default=256)
+    parser.add_argument('--image_height', type=int, default=224)
+    parser.add_argument('--image_width', type=int, default=224)
     parser.add_argument('--output_dir_path', type=str,
                         default=os.path.expanduser('~/.vaik-mnist-classification-dataset/dump'))
     args = parser.parse_args()

@@ -1,7 +1,7 @@
 import tensorflow as tf
 
-def prepare(class_num, image_size=(256, 256), bottle_neck=64, fine=False):
-    base_model = tf.keras.applications.EfficientNetV2B0(weights='imagenet' if fine else None,
+def prepare(class_num, image_size=(224, 224), bottle_neck=64, fine=False):
+    base_model = tf.keras.applications.MobileNetV2(weights='imagenet' if fine else None,
                                                       include_top=False, input_shape=(image_size[0], image_size[1], 3))
     x = base_model.output
     x = tf.keras.layers.Conv2D(filters=bottle_neck, kernel_size=3, activation='relu')(x)

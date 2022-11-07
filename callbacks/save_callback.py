@@ -1,8 +1,5 @@
 import os
 import tensorflow as tf
-from sklearn import metrics
-import numpy as np
-import copy
 
 class SaveCallback(tf.keras.callbacks.Callback):
     def __init__(self, save_model_dir_path, prefix):
@@ -17,4 +14,4 @@ class SaveCallback(tf.keras.callbacks.Callback):
         save_model_name = f'{self.prefix}_epoch-{epoch}_{loss_string}'
         output_model_dir_path = os.path.join(self.save_model_dir_path, save_model_name)
         os.makedirs(output_model_dir_path, exist_ok=True)
-        self.model.save(os.path.join(f'{output_model_dir_path}', 'model'))
+        self.model.save(output_model_dir_path)
