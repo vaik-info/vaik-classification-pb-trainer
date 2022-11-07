@@ -7,7 +7,7 @@ import tensorflow as tf
 from data import classification_dataset
 
 
-def main(input_image_dir_path, classes_txt_path, sample_num, image_height, image_width, output_dir_path):
+def dump(input_image_dir_path, classes_txt_path, sample_num, image_height, image_width, output_dir_path):
     os.makedirs(output_dir_path, exist_ok=True)
     classes = []
     with open(classes_txt_path) as f:
@@ -42,4 +42,4 @@ if __name__ == '__main__':
     args.classes_txt_path = os.path.expanduser(args.classes_txt_path)
     args.output_dir_path = os.path.expanduser(args.output_dir_path)
 
-    main(args.input_image_dir_path, args.classes_txt_path, args.sample_num, args.image_height, args.image_width, args.output_dir_path)
+    dump(args.input_image_dir_path, args.classes_txt_path, args.sample_num, args.image_height, args.image_width, args.output_dir_path)

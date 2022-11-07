@@ -57,7 +57,7 @@ class ClassificationDataset:
             image_dict[class_label] = []
             image_path_list = [file_path for file_path in glob.glob(os.path.join(dir_path, '**/*.*'), recursive=True) if
                                re.search('.*\.(png|jpg|bmp)$', file_path)]
-            for image_path in tqdm(image_path_list):
+            for image_path in tqdm(image_path_list, desc=f'_prepare_image_dict:{class_label}'):
                 image_dict[class_label].append(image_path)
         return image_dict
 
@@ -72,17 +72,17 @@ class ClassificationDataset:
 
 
 class TestClassificationDataset(ClassificationDataset):
-    max_test_sample = None
+    max_sample_per_classes = None
 
-    def __new__(cls, input_dir_path, classes, max_test_sample, input_size=(256, 256)):
-        cls.max_test_sample = max_test_sample
+    def __new__(cls, input_dir_path, classes, max_sample_per_classes, input_size=(256, 256)):
+        cls.max_sample_per_classes = max_sample_per_classes
         return super(TestClassificationDataset, cls).__new__(cls, input_dir_path, classes, input_size)
 
     @classmethod
     def _generator(cls):
         for class_index, class_label in enumerate(cls.classes):
             for image_index, image_path in enumerate(cls.image_dict[class_label]):
-                if image_index > cls.max_test_sample:
+                if image_index > cls.max_sample_per_classes - 1:
                     break
                 tf_image = tf.image.decode_image(tf.io.read_file(image_path), channels=3)
                 tf_image = tf.image.resize(tf_image, (cls.input_size[0], cls.input_size[1]), preserve_aspect_ratio=True)
@@ -91,3 +91,14 @@ class TestClassificationDataset(ClassificationDataset):
                     tf.convert_to_tensor(canvas_image),
                     tf.convert_to_tensor(class_index)
                 )
+    @classmethod
+    def get_all_data(cls, dataset):
+        dataset = iter(dataset)
+        data_list = []
+        for data in dataset:
+            data_list.append(data)
+        all_data_list = [None for _ in range(len(data_list[0]))]
+        for index in range(len(data_list[0])):
+            all_data_list[index] = tf.stack([data[index] for data in data_list])
+        return tuple(all_data_list)
+
