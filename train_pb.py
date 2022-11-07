@@ -63,7 +63,7 @@ if __name__ == '__main__':
     parser.add_argument('--test_max_sample_per_classes', type=int, default=100)
     parser.add_argument('--image_height', type=int, default=224)
     parser.add_argument('--image_width', type=int, default=224)
-    parser.add_argument('--output_dir_path', type=str, default=os.path.expanduser('~/output_model'))
+    parser.add_argument('--output_dir_path', type=str, default='~/output_model')
     args = parser.parse_args()
 
     args.train_input_dir_path = os.path.expanduser(args.train_input_dir_path)

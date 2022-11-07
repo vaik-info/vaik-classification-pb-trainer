@@ -28,14 +28,14 @@ def dump(input_image_dir_path, classes_txt_path, sample_num, image_height, image
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='train')
     parser.add_argument('--input_image_dir_path', type=str,
-                        default=os.path.expanduser('~/.vaik-mnist-classification-dataset/train'))
+                        default='~/.vaik-mnist-classification-dataset/train')
     parser.add_argument('--classes_txt_path', type=str,
-                        default=os.path.expanduser('~/.vaik-mnist-classification-dataset/classes.txt'))
+                        default='~/.vaik-mnist-classification-dataset/classes.txt')
     parser.add_argument('--sample_num', type=int, default=25000)
     parser.add_argument('--image_height', type=int, default=224)
     parser.add_argument('--image_width', type=int, default=224)
     parser.add_argument('--output_dir_path', type=str,
-                        default=os.path.expanduser('~/.vaik-mnist-classification-dataset/dump'))
+                        default='~/.vaik-mnist-classification-dataset/dump')
     args = parser.parse_args()
 
     args.input_image_dir_path = os.path.expanduser(args.input_image_dir_path)
