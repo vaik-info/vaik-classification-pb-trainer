@@ -21,6 +21,20 @@ python train_pb.py --train_input_dir_path ~/.vaik-mnist-classification-dataset/t
                 --output_dir_path '~/output_model'        
 ```
 
+- train_input_dir_path & valid_input_dir_path
+
+```shell
+.
+├── eight
+│   ├── valid_000000024.jpg
+│   ├── valid_000000034.jpg
+・・・
+│   └── valid_000001976.jpg
+├── five
+│   ├── valid_000000016.jpg
+・・・
+```
+
 ### Output
 
 ![vaik-classification-pb-trainer-output-train1](https://user-images.githubusercontent.com/116471878/200271108-3b485be9-be4d-48f3-b185-855be8651cf6.png)
