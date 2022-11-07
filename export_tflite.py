@@ -50,11 +50,11 @@ if __name__ == '__main__':
     parser.add_argument('--output_model_file_path', type=str,
                         default='~/output_tflite_model/mnist_mobile_net_v2.tflite',
                         help="output tflite model dir path")
-    parser.add_argument('--sample_max_num', type=int, default=100, help="output tflite model dir path")
+    parser.add_argument('--sample_max_num', type=int, default=25000, help="output tflite model dir path")
     args = parser.parse_args()
 
     args.input_model_dir_path = os.path.expanduser(args.input_model_dir_path)
     args.train_input_dir_path = os.path.expanduser(args.train_input_dir_path)
     args.output_model_file_path = os.path.expanduser(args.output_model_file_path)
 
-    main(args.input_model_dir_path, args.train_input_dir_path, args.output_model_file_path, args.sample_max_num)
+    main(args.input_model_dir_path, args.train_input_dir_path, args.output_model_file_path)
