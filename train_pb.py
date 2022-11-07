@@ -9,13 +9,17 @@ tf.get_logger().setLevel('ERROR')
 tf.debugging.disable_traceback_filtering()
 
 from data import classification_dataset
-from model import mobile_net_v2_model
+from model import mobile_net_v2_model, efficient_net_v2_b0_model
 from callbacks import save_callback
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s | %(name)s | %(levelname)s | %(message)s')
 
+model_dict = {
+    'efficient_net_v2_b0_model': efficient_net_v2_b0_model.prepare,
+    'mobile_net_v2_model': mobile_net_v2_model.prepare
+}
 
-def train(train_input_dir_path, valid_input_dir_path, classes_txt_path, epochs, step_size, batch_size,
+def train(train_input_dir_path, valid_input_dir_path, classes_txt_path, model_type, epochs, step_size, batch_size,
           test_max_sample_per_classes, image_size, output_dir_path):
     # Download data
     with open(classes_txt_path, 'r') as f:
@@ -32,7 +36,7 @@ def train(train_input_dir_path, valid_input_dir_path, classes_txt_path, epochs, 
     valid_data = classification_dataset.TestClassificationDataset.get_all_data(valid_dataset)
 
     # prepare model
-    model = mobile_net_v2_model.prepare(len(classes), image_size, fine=True)
+    model = model_dict[model_type](len(classes), image_size, fine=True)
     model.compile(optimizer=tf.keras.optimizers.Adam(), loss=tf.keras.losses.SparseCategoricalCrossentropy(),
                   metrics=tf.keras.metrics.SparseCategoricalAccuracy())
     # prepare callback
@@ -52,6 +56,7 @@ if __name__ == '__main__':
     parser.add_argument('--train_input_dir_path', type=str, default='~/.vaik-mnist-classification-dataset/train')
     parser.add_argument('--valid_input_dir_path', type=str, default='~/.vaik-mnist-classification-dataset/valid')
     parser.add_argument('--classes_txt_path', type=str, default='~/.vaik-mnist-classification-dataset/classes.txt')
+    parser.add_argument('--model_type', type=str, default='efficient_net_v2_b0_model')
     parser.add_argument('--epochs', type=int, default=10)
     parser.add_argument('--step_size', type=int, default=1000)
     parser.add_argument('--batch_size', type=int, default=8)
@@ -67,6 +72,6 @@ if __name__ == '__main__':
     args.output_dir_path = os.path.expanduser(args.output_dir_path)
 
     os.makedirs(args.output_dir_path, exist_ok=True)
-    train(args.train_input_dir_path, args.valid_input_dir_path, args.classes_txt_path,
+    train(args.train_input_dir_path, args.valid_input_dir_path, args.classes_txt_path, args.model_type,
           args.epochs, args.step_size, args.batch_size, args.test_max_sample_per_classes,
           (args.image_height, args.image_width), args.output_dir_path)
