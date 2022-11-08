@@ -22,7 +22,7 @@ def dump(input_image_dir_path, classes_txt_path, sample_num, image_height, image
         image, class_index = train_dataset.get_next()
         class_index = class_index.numpy()[0]
         image = image.numpy()[0]
-        output_image_path = os.path.join(output_dir_path, f'{classes[class_index]}_{index:09d}.jpg')
+        output_image_path = os.path.join(output_dir_path, f'{index:09d}_{classes[class_index]}_.jpg')
         Image.fromarray(image).save(output_image_path, quality=100, subsampling=0)
 
 if __name__ == '__main__':
