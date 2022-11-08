@@ -11,7 +11,7 @@ pip install -r requirements.txt
 python train_pb.py --train_input_dir_path ~/.vaik-mnist-classification-dataset/train \
                 --valid_input_dir_path ~/.vaik-mnist-classification-dataset/valid \
                 --classes_txt_path ~/.vaik-mnist-classification-dataset/classes.txt \
-                --model_type efficient_net_v2_b0_model \
+                --model_type mobile_net_v2_model \
                 --epochs 10 \
                 --step_size 100 \
                 --batch_size 8 \

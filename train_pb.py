@@ -21,7 +21,6 @@ model_dict = {
 
 def train(train_input_dir_path, valid_input_dir_path, classes_txt_path, model_type, epochs, step_size, batch_size,
           test_max_sample_per_classes, image_size, output_dir_path):
-    # Download data
     with open(classes_txt_path, 'r') as f:
         classes = f.readlines()
     classes = [label.strip() for label in classes]
@@ -56,7 +55,7 @@ if __name__ == '__main__':
     parser.add_argument('--train_input_dir_path', type=str, default='~/.vaik-mnist-classification-dataset/train')
     parser.add_argument('--valid_input_dir_path', type=str, default='~/.vaik-mnist-classification-dataset/valid')
     parser.add_argument('--classes_txt_path', type=str, default='~/.vaik-mnist-classification-dataset/classes.txt')
-    parser.add_argument('--model_type', type=str, default='efficient_net_v2_b0_model')
+    parser.add_argument('--model_type', type=str, default='mobile_net_v2_model')
     parser.add_argument('--epochs', type=int, default=10)
     parser.add_argument('--step_size', type=int, default=1000)
     parser.add_argument('--batch_size', type=int, default=8)
