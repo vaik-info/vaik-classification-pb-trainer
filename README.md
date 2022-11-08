@@ -13,7 +13,7 @@ python train_pb.py --train_input_dir_path ~/.vaik-mnist-classification-dataset/t
                 --classes_txt_path ~/.vaik-mnist-classification-dataset/classes.txt \
                 --model_type mobile_net_v2_model \
                 --epochs 10 \
-                --step_size 100 \
+                --step_size 1000 \
                 --batch_size 8 \
                 --test_max_sample_per_classes 100 \
                 --image_height 224 \
